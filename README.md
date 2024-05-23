@@ -1,5 +1,7 @@
 # To-Do App (ReactJS and Phoenix)
 
+This app was an answer of the test ```Nacif - Full Stack Code Challenge.pdf```!
+
 To star up this project use the files:
 - On Windows run: ```win-start-up-app.bat```
 - Linux/MacOs run: ```linux-start-up-app.sh```
