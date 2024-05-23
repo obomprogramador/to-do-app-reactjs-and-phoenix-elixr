@@ -1,0 +1,52 @@
+networks:
+  to-do-net:
+    driver: bridge
+
+volumes:
+  database:
+
+services:
+  pg-db:
+    image: postgres
+    container_name: pstgresDB
+    environment:
+      - PGUSER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: pg_isready -U $$POSTGRES_USER
+    ports:
+      - "5432:5432"
+    networks:
+      - to-do-net
+    volumes:
+      - "database:/var/lib/postgresql/data"
+
+  back-api:
+    image: nicbet/phoenix:1.7.12
+    container_name: phx-api
+    command: "iex -S mix phx.server" #mix local.hex --force && mix setup &&
+    build:
+      context: ./to-do-backend
+    ports:
+      - "4000:4000"
+    networks:
+      - to-do-net
+    volumes:
+      - ./to-do-backend:/app
+    depends_on:
+      - pg-db
+
+  web-app:
+    container_name: webAPP
+    command: "npm run dev"
+    build:
+      context: ./to-do-webapp
+    ports:
+      - "5173:5173"
+    networks:
+      - to-do-net
+    volumes:
+      - ./to-do-webapp:/app
+    depends_on:
+      - pg-db
+      - back-api

@@ -1,0 +1,1 @@
+docker compose up -d && docker exec -it phx-api /bin/bash -c "mix setup"
