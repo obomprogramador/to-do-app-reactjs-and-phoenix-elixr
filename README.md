@@ -5,6 +5,8 @@ This app was an answer of the test ```Nacif - Full Stack Code Challenge.pdf```!
 To star up this project use the files:
 - On Windows run: ```win-start-up-app.bat```
 - Linux/MacOs run: ```linux-start-up-app.sh```
+- Or simply run direcly: 
+  - ```docker compose up -d && docker exec -it phx-api /bin/bash -c "mix setup"```
 
 This projéct use Phonix 1.7 and Vite to create ReactJS Apps.`
 
